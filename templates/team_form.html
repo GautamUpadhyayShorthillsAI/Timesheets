@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}New Team{% endblock %}
+{% block page_title %}Create Team{% endblock %}
+{% block content %}
+<form method="post" class="max-w-md mx-auto bg-white p-6 rounded shadow">
+    <div class="mb-4">
+        <label class="block">Team Name</label>
+        <input name="name" required class="w-full border px-3 py-2 rounded" placeholder="e.g. Backend Squad">
+    </div>
+    <div class="mb-4">
+        <label class="block">Team Lead</label>
+        <select name="lead_id" required class="w-full border px-3 py-2 rounded">
+            <option value="">— choose a lead —</option>
+            {% for lead in leads %}
+            <option value="{{ lead.id }}">{{ lead.username }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+        Create Team
+    </button>
+</form>
+{% endblock %}

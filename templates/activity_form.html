@@ -1,0 +1,27 @@
+<!-- templates/activity_form.html -->
+{% extends "base.html" %}
+{% block title %}New Activity{% endblock %}
+{% block page_title %}Create Activity{% endblock %}
+{% block content %}
+<form method="POST" class="max-w-md bg-white p-6 rounded shadow">
+    <div class="mb-4">
+        <label class="block mb-1">Activity Name</label>
+        <input type="text" name="name" required class="w-full border rounded px-3 py-2" />
+    </div>
+    <div class="mb-4">
+        <label class="block mb-1">Project</label>
+        <select name="project_id" class="w-full border rounded px-3 py-2">
+            {% for p in projects %}
+            <option value="{{ p.id }}">{{ p.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-4 flex items-center">
+        <input type="checkbox" name="is_billable" id="billable" class="mr-2" checked />
+        <label for="billable">Billable?</label>
+    </div>
+    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+        Create
+    </button>
+</form>
+{% endblock %}

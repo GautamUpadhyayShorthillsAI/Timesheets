@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ team.name }} Members{% endblock %}
+{% block page_title %}Manage “{{ team.name }}”{% endblock %}
+{% block content %}
+<h2 class="font-semibold mb-2">Current Members</h2>
+<ul class="mb-6">
+    {% for m in members %}
+    <li class="flex justify-between mb-1">
+        {{ m.username }}
+        <form method="post" action="{{ url_for('remove_member', id=team.id) }}">
+            <input type="hidden" name="user_id" value="{{ m.id }}">
+            <button class="text-red-500 hover:underline">Remove</button>
+        </form>
+    </li>
+    {% else %}
+    <li>No members yet.</li>
+    {% endfor %}
+</ul>
+
+<h2 class="font-semibold mb-2">Add a Member</h2>
+<form method="post" action="{{ url_for('add_member', id=team.id) }}" class="max-w-md">
+    <select name="user_id" required class="w-full border px-3 py-2 rounded mb-4">
+        <option value="">— select user —</option>
+        {% for u in available %}
+        <option value="{{ u.id }}">{{ u.username }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        Add Member
+    </button>
+</form>
+{% endblock %}

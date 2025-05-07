@@ -1,0 +1,23 @@
+<!-- templates/project_form.html -->
+{% extends "base.html" %}
+{% block title %}New Project{% endblock %}
+{% block page_title %}Create Project{% endblock %}
+{% block content %}
+<form method="POST" class="max-w-md bg-white p-6 rounded shadow">
+    <div class="mb-4">
+        <label class="block mb-1">Project Name</label>
+        <input type="text" name="name" required class="w-full border rounded px-3 py-2" />
+    </div>
+    <div class="mb-4">
+        <label class="block mb-1">Customer</label>
+        <select name="customer_id" class="w-full border rounded px-3 py-2">
+            {% for c in customers %}
+            <option value="{{ c.id }}">{{ c.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+        Create
+    </button>
+</form>
+{% endblock %}

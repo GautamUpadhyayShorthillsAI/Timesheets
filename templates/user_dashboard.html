@@ -1,0 +1,14 @@
+<!-- templates/user_dashboard.html -->
+{% extends "base.html" %}
+{% block title %}My Dashboard{% endblock %}
+{% block page_title %}Welcome, {{ current_user.username }}{% endblock %}
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <a href="{{ url_for('new_entry') }}" class="p-6 bg-white rounded shadow hover:bg-gray-50">
+        <h3 class="text-lg font-semibold">Log New Entry</h3>
+    </a>
+    <a href="{{ url_for('list_my_entries') }}" class="p-6 bg-white rounded shadow hover:bg-gray-50">
+        <h3 class="text-lg font-semibold">View My Entries</h3>
+    </a>
+</div>
+{% endblock %}

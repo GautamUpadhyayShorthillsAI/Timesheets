@@ -1,0 +1,31 @@
+<!-- templates/activities.html -->
+{% extends "base.html" %}
+{% block title %}Activities{% endblock %}
+{% block page_title %}Activities{% endblock %}
+{% block content %}
+<div class="flex justify-end mb-4">
+    <a href="{{ url_for('new_activity') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        + New Activity
+    </a>
+</div>
+<table class="min-w-full bg-white rounded shadow overflow-hidden">
+    <thead class="bg-gray-100">
+        <tr>
+            <th class="px-4 py-2">Name</th>
+            <th class="px-4 py-2">Project</th>
+            <th class="px-4 py-2">Billable?</th>
+            <th class="px-4 py-2">Active?</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in activities %}
+        <tr class="border-t">
+            <td class="px-4 py-2">{{ a.name }}</td>
+            <td class="px-4 py-2">{{ a.project.name }}</td>
+            <td class="px-4 py-2 text-center">{{ 'Yes' if a.is_billable else 'No' }}</td>
+            <td class="px-4 py-2 text-center">{{ 'Yes' if a.is_active else 'No' }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

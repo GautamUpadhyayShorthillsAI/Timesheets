@@ -1,0 +1,37 @@
+<!-- templates/entry_form.html -->
+{% extends "base.html" %}
+{% block title %}New Entry{% endblock %}
+{% block page_title %}Log Time Entry{% endblock %}
+{% block content %}
+<form method="POST" class="max-w-lg bg-white p-6 rounded shadow space-y-4">
+    <div>
+        <label class="block mb-1">Activity</label>
+        <select name="activity_id" class="w-full border rounded px-3 py-2">
+            {% for a in activities %}
+            <option value="{{ a.id }}">{{ a.project.name }} / {{ a.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="flex space-x-4">
+        <div class="flex-1">
+            <label class="block mb-1">Start Time</label>
+            <input type="datetime-local" name="start_time" required class="w-full border rounded px-3 py-2" />
+        </div>
+        <div class="flex-1">
+            <label class="block mb-1">End Time</label>
+            <input type="datetime-local" name="end_time" required class="w-full border rounded px-3 py-2" />
+        </div>
+    </div>
+    <div class="flex items-center">
+        <input type="checkbox" name="is_billable" id="billable" class="mr-2" checked />
+        <label for="billable">Billable?</label>
+    </div>
+    <div>
+        <label class="block mb-1">Description</label>
+        <textarea name="description" rows="3" class="w-full border rounded px-3 py-2"></textarea>
+    </div>
+    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+        Save Entry
+    </button>
+</form>
+{% endblock %}

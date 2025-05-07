@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Teams{% endblock %}
+{% block page_title %}All Teams{% endblock %}
+{% block content %}
+<div class="flex justify-end mb-4">
+    <a href="{{ url_for('new_team') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        + New Team
+    </a>
+</div>
+<table class="w-full bg-white shadow rounded">
+    <thead class="bg-gray-100">
+        <tr>
+            <th class="p-2 text-left">Name</th>
+            <th class="p-2 text-left">Lead</th>
+            <th class="p-2 text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for team in teams %}
+        <tr class="border-t">
+            <td class="p-2">{{ team.name }}</td>
+            <td class="p-2">{{ team.lead.username if team.lead else '-' }}</td>
+            <td class="p-2 text-right space-x-2">
+                <a href="{{ url_for('list_team_members', id=team.id) }}"
+                    class="text-blue-500 hover:underline">Members</a>
+                <form method="post" action="{{ url_for('delete_team', id=team.id) }}" class="inline">
+                    <button type="submit" class="text-red-500 hover:underline"
+                        onclick="return confirm('Delete this team?');">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

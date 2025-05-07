@@ -1,0 +1,36 @@
+<!-- templates/entries_pending.html -->
+{% extends "base.html" %}
+{% block title %}Pending Entries{% endblock %}
+{% block page_title %}Approve Entries{% endblock %}
+{% block content %}
+<table class="min-w-full bg-white rounded shadow overflow-hidden">
+    <thead class="bg-gray-100">
+        <tr>
+            <th class="px-4 py-2">User</th>
+            <th class="px-4 py-2">Project / Activity</th>
+            <th class="px-4 py-2">Start</th>
+            <th class="px-4 py-2">End</th>
+            <th class="px-4 py-2">Duration</th>
+            <th class="px-4 py-2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for e in entries %}
+        <tr class="border-t">
+            <td class="px-4 py-2">{{ e.user.username }}</td>
+            <td class="px-4 py-2">{{ e.project.name }} / {{ e.activity.name }}</td>
+            <td class="px-4 py-2">{{ e.start_time.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td class="px-4 py-2">{{ e.end_time.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td class="px-4 py-2">{{ '%.2f'|format(e.duration_hours) }}h</td>
+            <td class="px-4 py-2">
+                <form method="POST" action="{{ url_for('approve_entry', id=e.id) }}">
+                    <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
+                        Approve
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

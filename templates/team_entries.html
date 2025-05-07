@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{ team.name }} Timesheets{% endblock %}
+{% block page_title %}Timesheets for “{{ team.name }}”{% endblock %}
+{% block content %}
+<table class="w-full bg-white shadow rounded">
+    <thead class="bg-gray-100">
+        <tr>
+            <th class="p-2 text-left">User</th>
+            <th class="p-2 text-left">Activity</th>
+            <th class="p-2 text-left">Start</th>
+            <th class="p-2 text-left">End</th>
+            <th class="p-2 text-right">Hours</th>
+            <th class="p-2 text-center">Approved</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for e in entries %}
+        <tr class="border-t">
+            <td class="p-2">{{ e.user.username }}</td>
+            <td class="p-2">{{ e.activity.name }}</td>
+            <td class="p-2">{{ e.start_time.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td class="p-2">{{ e.end_time.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td class="p-2 text-right">{{ '%.2f'|format(e.duration_hours) }}</td>
+            <td class="p-2 text-center">
+                {% if e.is_approved %}
+                ✅
+                {% else %}
+                <form method="post" action="{{ url_for('approve_entry', id=e.id) }}">
+                    <button class="text-blue-500 hover:underline">Approve</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

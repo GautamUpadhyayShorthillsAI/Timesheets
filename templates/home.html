@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold">Welcome, {{ user.username }}</h3>
+        <p class="mt-2 text-gray-600">Role: {{ user.role }}</p>
+    </div>
+
+    {% if user.role == 'ROLE_ADMIN' %}
+    <div class="bg-white p-6 rounded-lg shadow space-y-4">
+        <a href="{{ url_for('list_customers') }}" class="block text-blue-600 hover:underline">Manage Customers</a>
+        <a href="{{ url_for('list_projects') }}" class="block text-blue-600 hover:underline">Manage Projects</a>
+        <a href="{{ url_for('list_activities') }}" class="block text-blue-600 hover:underline">Manage Activities</a>
+        <a href="{{ url_for('all_entries') }}" class="block text-blue-600 hover:underline">View All Entries</a>
+    </div>
+
+    {% elif user.role == 'ROLE_TEAMLEAD' %}
+    <div class="bg-white p-6 rounded-lg shadow space-y-4">
+        <a href="{{ url_for('pending_entries') }}" class="block text-blue-600 hover:underline">Pending Approvals</a>
+        <a href="{{ url_for('list_my_entries') }}" class="block text-blue-600 hover:underline">Team Timesheets</a>
+    </div>
+
+    {% else %}
+    <div class="bg-white p-6 rounded-lg shadow space-y-4">
+        <a href="{{ url_for('new_entry') }}" class="block text-blue-600 hover:underline">New Timesheet Entry</a>
+        <a href="{{ url_for('list_my_entries') }}" class="block text-blue-600 hover:underline">View My Entries</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!-- templates/user_form.html -->
+{% extends "base.html" %}
+{% block title %}New User{% endblock %}
+{% block page_title %}Create User{% endblock %}
+{% block content %}
+<form method="POST" class="max-w-md bg-white p-6 rounded shadow space-y-4">
+    <div>
+        <label class="block mb-1">Username</label>
+        <input type="text" name="username" required class="w-full border rounded px-3 py-2" />
+    </div>
+    <div>
+        <label class="block mb-1">Password</label>
+        <input type="password" name="password" required class="w-full border rounded px-3 py-2" />
+    </div>
+    <div>
+        <label class="block mb-1">Role</label>
+        <select name="role" class="w-full border rounded px-3 py-2">
+            <option value="ROLE_USER">User</option>
+            <option value="ROLE_TEAMLEAD">Team Lead</option>
+            <option value="ROLE_ADMIN">Admin</option>
+        </select>
+    </div>
+    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+        Create
+    </button>
+</form>
+{% endblock %}

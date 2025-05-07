@@ -1,0 +1,39 @@
+<!-- templates/users.html -->
+{% extends "base.html" %}
+{% block title %}Users{% endblock %}
+{% block page_title %}User Management{% endblock %}
+{% block content %}
+<div class="flex justify-end mb-4">
+    <a href="{{ url_for('new_user') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        + New User
+    </a>
+</div>
+<table class="min-w-full bg-white rounded shadow overflow-hidden">
+    <thead class="bg-gray-100">
+        <tr>
+            <th class="px-4 py-2">Username</th>
+            <th class="px-4 py-2">Role</th>
+            <th class="px-4 py-2">Approved?</th>
+            <th class="px-4 py-2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for u in users %}
+        <tr class="border-t">
+            <td class="px-4 py-2">{{ u.username }}</td>
+            <td class="px-4 py-2">{{ u.role }}</td>
+            <td class="px-4 py-2 text-center">{{ 'Yes' if u.is_approved else 'No' }}</td>
+            <td class="px-4 py-2">
+                {% if not u.is_approved %}
+                <form method="POST" action="{{ url_for('approve_user', id=u.id) }}">
+                    <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
+                        Approve
+                    </button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

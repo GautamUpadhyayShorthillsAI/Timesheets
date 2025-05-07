@@ -1,0 +1,29 @@
+<!-- templates/customers.html -->
+{% extends "base.html" %}
+{% block title %}Customers{% endblock %}
+{% block page_title %}Customers{% endblock %}
+{% block content %}
+<div class="flex justify-end mb-4">
+    <a href="{{ url_for('new_customer') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        + New Customer
+    </a>
+</div>
+<table class="min-w-full bg-white rounded shadow overflow-hidden">
+    <thead class="bg-gray-100">
+        <tr>
+            <th class="px-4 py-2 text-left">Name</th>
+            <th class="px-4 py-2">Active?</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in customers %}
+        <tr class="border-t">
+            <td class="px-4 py-2">{{ c.name }}</td>
+            <td class="px-4 py-2 text-center">
+                {{ 'Yes' if c.is_active else 'No' }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
