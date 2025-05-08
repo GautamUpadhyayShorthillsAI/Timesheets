@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+<!-- {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block page_title %}Dashboard{% endblock %}
 {% block content %}
@@ -19,7 +19,7 @@
     {% elif user.role == 'ROLE_TEAMLEAD' %}
     <div class="bg-white p-6 rounded-lg shadow space-y-4">
         <a href="{{ url_for('pending_entries') }}" class="block text-blue-600 hover:underline">Pending Approvals</a>
-        <a href="{{ url_for('list_my_entries') }}" class="block text-blue-600 hover:underline">Team Timesheets</a>
+        <a href="http://127.0.0.1:5002/entries/all_lead" class="block text-blue-600 hover:underline">Team Timesheets</a>
     </div>
 
     {% else %}
@@ -29,4 +29,4 @@
     </div>
     {% endif %}
 </div>
-{% endblock %}
+{% endblock %} -->

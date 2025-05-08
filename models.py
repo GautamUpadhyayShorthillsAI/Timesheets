@@ -71,6 +71,7 @@ class TimesheetEntry(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey("projects.id"), nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey("activities.id"), nullable=False)
+    #Add a db column to the information of team lead
     start_time = db.Column(db.DateTime, nullable=False)
     end_time = db.Column(db.DateTime, nullable=False)
     duration_hours = db.Column(db.Float, nullable=False)

@@ -304,6 +304,17 @@ def all_entries():
     entries = TimesheetEntry.query.order_by(TimesheetEntry.start_time.desc()).all()
     return render_template("entries_all.html", entries=entries)
 
+@app.route("/entries/all_lead")
+@login_required
+@role_required("ROLE_TEAMLEAD")
+def all_entries_lead():
+    user = User.query.all()
+    team = Team.query.all()
+    print(user[0].__dict__)
+    entries = TimesheetEntry.query.order_by(TimesheetEntry.start_time.desc()).all()
+    print(list(entries)[0].__dict__)
+    return render_template("entries_all.html", entries=entries)
+
 
 # ----------------------------------------
 # User Management & Approval (Admin)
